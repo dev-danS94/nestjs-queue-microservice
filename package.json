@@ -14,7 +14,7 @@
  },
  "dependencies": {
   "@nestjs/bullmq": "^11.0.4",
-  "@nestjs/config": "^4.0.2",
+  "@nestjs/config": "^4.0.4",
   "@nestjs/platform-express": "^11.1.8",
   "@nestjs/typeorm": "^11.0.0",
   "bullmq": "^5.62.2",
