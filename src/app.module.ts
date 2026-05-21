@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { BullModule } from '@nestjs/bullmq';
-import { EventsModule } from './events/events.module';
-import { BonoGalloModule } from './bono-gallo/bono-gallo.module';
-import { ReservationsModule } from './reservations/reservations.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+import { ExampleModule } from './example/example.module';
 
 @Module({
   imports: [
@@ -17,9 +18,20 @@ import { ReservationsModule } from './reservations/reservations.module';
       },
     }),
 
-    EventsModule,
-    BonoGalloModule,
-    ReservationsModule,
+    TypeOrmModule.forRoot({
+      type: 'mysql',
+      host: process.env.DB_HOST,
+      port: parseInt(process.env.DB_PORT || '3306'),
+      username: process.env.DB_USER,
+      password: process.env.DB_PASS,
+      database: process.env.DB_NAME,
+      autoLoadEntities: true,
+      synchronize: false,
+    }),
+
+    ExampleModule,
   ],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
