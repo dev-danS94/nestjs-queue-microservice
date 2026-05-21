@@ -1,0 +1,24 @@
+services:
+  queue-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: queue-service
+    ports:
+      - "3000:3000"
+    environment:
+      # --- VARIABLES DE ENTORNO ---
+      PORT: ${PORT}
+      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PORT: ${REDIS_PORT}
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+      BACKEND_URL: ${BACKEND_URL}
+    
+    
+    networks:
+      - queue-network
+
+# Redes
+networks:
+  queue-network:
+    driver: bridge
