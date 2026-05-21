@@ -1,6 +1,6 @@
 # --- 1. Etapa de "Builder" (Construcción) ---
 # CAMBIO IMPORTANTE: Usamos 'slim' en lugar de 'alpine' para evitar errores de SSL en Mac
-FROM node:22-slim AS builder
+FROM node:26-slim AS builder
 
 # Establecemos el directorio de trabajo
 WORKDIR /usr/src/app
@@ -18,7 +18,7 @@ COPY . .
 RUN npm run build
 
 # --- 2. Etapa de "Production" (Producción) ---
-FROM node:22-slim
+FROM node:26-slim
 
 WORKDIR /usr/src/app
 
